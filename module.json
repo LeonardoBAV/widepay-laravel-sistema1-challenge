@@ -1,0 +1,13 @@
+{
+    "name": "WidePayLaravelSistema1Challenge",
+    "alias": "widepaylaravelsistema1challenge",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\WidePayLaravelSistema1Challenge\\Providers\\WidePayLaravelSistema1ChallengeServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
