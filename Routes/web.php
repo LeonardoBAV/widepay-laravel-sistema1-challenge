@@ -1,16 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::middleware('auth')->group(function() {
 
-Route::prefix('widepaylaravelsistema1challenge')->group(function() {
-    Route::get('/', 'WidePayLaravelSistema1ChallengeController@index');
+    Route::get('/{tab?}', 'WidePayLaravelSistema1ChallengeController@index');
+
+    Route::prefix('urls')->group(function() {
+        Route::post('/', 'UrlController@store')->name('urls.store');
+        Route::put('/', 'UrlController@update')->name('urls.update');
+        Route::delete('/', 'UrlController@destroy')->name('urls.destroy');
+    });    
+
 });
