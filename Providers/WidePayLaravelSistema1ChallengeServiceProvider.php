@@ -4,6 +4,9 @@ namespace Modules\WidePayLaravelSistema1Challenge\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Laravel\Fortify\Fortify;
+use Modules\WidePayLaravelSistema1Challenge\Entities\Client;
+use Modules\WidePayLaravelSistema1Challenge\Fortify\CreateNewUser;
 
 class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
 {
@@ -24,10 +27,21 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //dd('widepay');
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        Fortify::loginView(function () {
+            return  view('widepaylaravelsistema1challenge::auth.login');
+        });
+
+        Fortify::registerView(function () {
+            return view('widepaylaravelsistema1challenge::auth.register');
+        });
+        
+        Fortify::createUsersUsing(CreateNewUser::class);
     }
 
     /**
@@ -38,6 +52,30 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $guards = config('auth.guards');
+        $guards['web'] = [
+            'driver' => 'session',
+            'provider' => 'clients',
+        ];
+
+        config(['auth.guards' => $guards]);
+
+        $providers = config('auth.providers');
+        $providers['clients'] =  [
+            'driver' => 'eloquent',
+            'model' => Client::class,
+        ];
+
+        config(['auth.providers' => $providers]);
+
+
+        $passwords = config('auth.passwords');
+        $passwords['clients'] =  [
+            'provider' => 'clients',
+            'table' => 'clients_password_resets',
+            'expire' => 60,
+        ];
     }
 
     /**
