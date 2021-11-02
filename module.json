@@ -6,7 +6,8 @@
     "priority": 0,
     "providers": [
         "App\\Providers\\FortifyServiceProvider",
-        "Modules\\WidePayLaravelSistema1Challenge\\Providers\\WidePayLaravelSistema1ChallengeServiceProvider"
+        "Modules\\WidePayLaravelSistema1Challenge\\Providers\\WidePayLaravelSistema1ChallengeServiceProvider",
+        "Modules\\WidePayLaravelSistema1Challenge\\Providers\\AuthServiceProvider"
     ],
     "aliases": {},
     "files": [],

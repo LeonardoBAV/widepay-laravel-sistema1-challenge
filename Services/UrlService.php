@@ -2,6 +2,7 @@
 
 namespace Modules\WidePayLaravelSistema1Challenge\Services;
 
+use App\Models\User;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
 
 class UrlService {
@@ -10,6 +11,10 @@ class UrlService {
 
     public function list(){
         return Url::all();
+    }
+
+    public function listByUser(User $user){
+        return Url::where('user_id', $user->id)->get();
     }
 
     public function edit(Url $url){

@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Client;
+use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
 use Modules\WidePayLaravelSistema1Challenge\Fortify\CreateNewUser;
 use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\IndexComposer;
 use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\Tabs\UrlsComposer;
+use Modules\WidePayLaravelSistema1Challenge\Policies\UrlPolicy;
 
 class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
 {
@@ -128,4 +130,6 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         }
         return $paths;
     }
+
+
 }

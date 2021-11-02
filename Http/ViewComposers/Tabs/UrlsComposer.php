@@ -3,6 +3,8 @@
 namespace Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\Tabs;
 
 use Illuminate\View\View;
+use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
+use Modules\WidePayLaravelSistema1Challenge\Entities\User;
 use Modules\WidePayLaravelSistema1Challenge\Services\UrlService;
 
 class UrlsComposer
@@ -14,7 +16,7 @@ class UrlsComposer
     public function __construct(public UrlService $urlService)
     {
         $this->url = request()->route()->parameter('url');
-        $this->urls = $urlService->list();
+        $this->urls = $urlService->listByUser(auth()->user());
     }
 
 
