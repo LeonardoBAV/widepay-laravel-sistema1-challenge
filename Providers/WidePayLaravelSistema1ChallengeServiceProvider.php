@@ -57,30 +57,6 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
-        /*$guards = config('auth.guards');
-        $guards['web'] = [
-            'driver' => 'session',
-            'provider' => 'clients',
-        ];
-
-        config(['auth.guards' => $guards]);
-
-        $providers = config('auth.providers');
-        $providers['clients'] =  [
-            'driver' => 'eloquent',
-            'model' => Client::class,
-        ];
-
-        config(['auth.providers' => $providers]);
-
-
-        $passwords = config('auth.passwords');
-        $passwords['clients'] =  [
-            'provider' => 'clients',
-            'table' => 'clients_password_resets',
-            'expire' => 60,
-        ];*/
     }
 
     /**

@@ -11,10 +11,10 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade {{ $tab == 0? 'show active': '' }}">
-                @include('widepaylaravelsistema1challenge::tabs.requests')
+                @includeWhen($tab == 0, 'widepaylaravelsistema1challenge::tabs.requests')
             </div>
             <div class="tab-pane fade {{ $tab == 1? 'show active': '' }}">
-            @include('widepaylaravelsistema1challenge::tabs.urls.urls')
+                @includeWhen($tab == 1, 'widepaylaravelsistema1challenge::tabs.urls.urls')                
             </div>
         </div>
     </div>
