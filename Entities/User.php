@@ -2,16 +2,11 @@
 
 namespace Modules\WidePayLaravelSistema1Challenge\Entities;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\User as ModelsUser;
 
-class Client extends Authenticatable
+
+class User extends ModelsUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    use HasFactory;
 
     protected $fillable = ['name', 'email', 'email_verified_at', 'password'];
     

@@ -9,7 +9,7 @@ class Url extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client_id', 'url'];
+    protected $fillable = ['user_id', 'url'];
     
     protected static function newFactory()
     {
@@ -17,9 +17,9 @@ class Url extends Model
     }
 
 
-    public function client()
+    public function user()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 
 }

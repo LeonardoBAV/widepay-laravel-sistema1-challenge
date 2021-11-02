@@ -43,8 +43,6 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
             return view('widepaylaravelsistema1challenge::auth.register');
         });
         
-        Fortify::createUsersUsing(CreateNewUser::class);
-
         View::composer('widepaylaravelsistema1challenge::index', IndexComposer::class);
         View::composer('widepaylaravelsistema1challenge::tabs.urls.urls', UrlsComposer::class);
 
@@ -60,7 +58,7 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
 
-        $guards = config('auth.guards');
+        /*$guards = config('auth.guards');
         $guards['web'] = [
             'driver' => 'session',
             'provider' => 'clients',
@@ -82,7 +80,7 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
             'provider' => 'clients',
             'table' => 'clients_password_resets',
             'expire' => 60,
-        ];
+        ];*/
     }
 
     /**
