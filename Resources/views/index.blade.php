@@ -14,7 +14,7 @@
                 @include('widepaylaravelsistema1challenge::tabs.requests')
             </div>
             <div class="tab-pane fade {{ $tab == 1? 'show active': '' }}">
-            @include('widepaylaravelsistema1challenge::tabs.urls')
+            @include('widepaylaravelsistema1challenge::tabs.urls.urls')
             </div>
         </div>
     </div>

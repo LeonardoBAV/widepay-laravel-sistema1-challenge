@@ -11,10 +11,8 @@
 
     @if(session()->has('alert-success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Erro: </strong>{!! session()->get('alert-success') !!}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <strong>Sucesso: </strong>{!! session()->get('alert-success') !!}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
 </div>

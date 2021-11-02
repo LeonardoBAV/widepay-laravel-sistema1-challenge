@@ -9,6 +9,7 @@ use Laravel\Fortify\Fortify;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Client;
 use Modules\WidePayLaravelSistema1Challenge\Fortify\CreateNewUser;
 use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\IndexComposer;
+use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\Tabs\UrlsComposer;
 
 class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
 {
@@ -45,9 +46,9 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         Fortify::createUsersUsing(CreateNewUser::class);
 
         View::composer('widepaylaravelsistema1challenge::index', IndexComposer::class);
+        View::composer('widepaylaravelsistema1challenge::tabs.urls.urls', UrlsComposer::class);
 
         Blade::component('widepaylaravelsistema1challenge::components.alert', 'alert');
-
     }
 
     /**
