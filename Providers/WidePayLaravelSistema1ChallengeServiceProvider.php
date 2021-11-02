@@ -2,11 +2,13 @@
 
 namespace Modules\WidePayLaravelSistema1Challenge\Providers;
 
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 use Laravel\Fortify\Fortify;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Client;
 use Modules\WidePayLaravelSistema1Challenge\Fortify\CreateNewUser;
+use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\IndexComposer;
 
 class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
 {
@@ -27,7 +29,6 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //dd('widepay');
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -42,6 +43,11 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         });
         
         Fortify::createUsersUsing(CreateNewUser::class);
+
+        View::composer('widepaylaravelsistema1challenge::index', IndexComposer::class);
+
+        Blade::component('widepaylaravelsistema1challenge::components.alert', 'alert');
+
     }
 
     /**
