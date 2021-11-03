@@ -11,6 +11,7 @@ use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
 use Modules\WidePayLaravelSistema1Challenge\Fortify\CreateNewUser;
 use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\IndexComposer;
 use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\Tabs\UrlsComposer;
+use Modules\WidePayLaravelSistema1Challenge\Observers\UrlObserver;
 use Modules\WidePayLaravelSistema1Challenge\Policies\UrlPolicy;
 
 class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
@@ -49,6 +50,8 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         View::composer('widepaylaravelsistema1challenge::tabs.urls.urls', UrlsComposer::class);
 
         Blade::component('widepaylaravelsistema1challenge::components.alert', 'alert');
+
+        Url::observe(UrlObserver::class);
     }
 
     /**
