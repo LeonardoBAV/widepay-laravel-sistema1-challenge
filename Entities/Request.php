@@ -9,7 +9,7 @@ class Request extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'time', 'status_code', 'body'];
+    protected $fillable = ['user_id', 'url', 'time', 'status_code', 'body'];
     
     protected static function newFactory()
     {

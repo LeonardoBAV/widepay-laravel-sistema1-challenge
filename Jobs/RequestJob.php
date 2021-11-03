@@ -34,11 +34,12 @@ class RequestJob implements ShouldQueue
 
     private function sendResponse(){
         $user_id = $this->url->user_id;
+        $url = $this->url->url;
         $time = $this->time;
         $statusCode = $this->response->status();
         $body = $this->response->body();
 
-        (new JobService())->dispatchRequestData($user_id, $time, $statusCode, $body);
+        (new JobService())->dispatchRequestData($user_id, $url, $time, $statusCode, $body);
     }
 
 }

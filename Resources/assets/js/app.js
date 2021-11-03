@@ -1,2 +1,3 @@
-//require('bootstrap');
-import 'bootstrap';
+//import 'bootstrap';
+//import { Modal } from 'bootstrap';
+window.bootstrap = require("bootstrap");

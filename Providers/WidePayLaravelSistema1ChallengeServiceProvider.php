@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Livewire\Livewire;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Client;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
 use Modules\WidePayLaravelSistema1Challenge\Fortify\CreateNewUser;
+use Modules\WidePayLaravelSistema1Challenge\Http\Livewire\ModalComponent;
+use Modules\WidePayLaravelSistema1Challenge\Http\Livewire\RequestsComponent;
 use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\IndexComposer;
 use Modules\WidePayLaravelSistema1Challenge\Http\ViewComposers\Tabs\UrlsComposer;
 use Modules\WidePayLaravelSistema1Challenge\Observers\UrlObserver;
@@ -53,6 +56,9 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         Blade::component('widepaylaravelsistema1challenge::components.alert', 'alert');
 
         Url::observe(UrlObserver::class);
+
+        Livewire::component('requests-component', RequestsComponent::class);
+        Livewire::component('modal-component', ModalComponent::class);
     }
 
     /**
