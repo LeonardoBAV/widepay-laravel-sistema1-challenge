@@ -6,8 +6,8 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
 
-class UrlPolicy
-{
+class UrlPolicy {
+    
     use HandlesAuthorization;
 
 

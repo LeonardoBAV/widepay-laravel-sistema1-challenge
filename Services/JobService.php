@@ -10,7 +10,11 @@ class JobService {
     function __construct(){}
 
     public function dispatchUrl(Url $url){
-        RequestUrlJob::dispatch($url);
+        RequestUrlJob::dispatch($url)->onQueue('urls');
+    }
+
+    public function dispatchRequestData($time, $statusCode, $body){
+
     }
 
 }
