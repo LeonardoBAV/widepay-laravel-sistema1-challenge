@@ -12,35 +12,33 @@ use Illuminate\Support\Facades\Http;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
 use Modules\WidePayLaravelSistema1Challenge\Services\JobService;
 
-class RequestUrlJob implements ShouldQueue
+class RequestJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    private $time;
+    private $response;
 
     public function __construct(public Url $url) {}
 
     public function handle()
     {
-        $time = $this->getTimeOfRequest();
-        $response = $this->doRequest();
-        $statusCode = $this->getStatusCode($response);
-        $body = $this->getBody($response);
-        
-        (new JobService())->dispatchRequestData($time, $statusCode, $body);
-    }
-
-    private function getTimeOfRequest(){
-        return Carbon::now()->format('d-m-Y H:i:s');
+        $this->doRequest();
+        $this->sendResponse();
     }
 
     private function doRequest(){
-        return Http::get($this->url->url);
+        $this->time = Carbon::now()->format('Y-m-d H:i:s');
+        $this->response = Http::get($this->url->url); 
     }
 
-    private function getStatusCode($response){
-        return $response->status();
+    private function sendResponse(){
+        $user_id = $this->url->user_id;
+        $time = $this->time;
+        $statusCode = $this->response->status();
+        $body = $this->response->body();
+
+        (new JobService())->dispatchRequestData($user_id, $time, $statusCode, $body);
     }
 
-    private function getBody($response){
-        return $response->body();
-    }
 }

@@ -39,5 +39,10 @@ class User extends ModelsUser
         return $this->hasMany(Url::class);
     }
 
+    public function request()
+    {
+        return $this->hasMany(Request::class);
+    }
+
 
 }
