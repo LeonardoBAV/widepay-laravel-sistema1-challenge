@@ -3,6 +3,7 @@
 namespace Modules\WidePayLaravelSistema1Challenge\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
@@ -62,6 +63,7 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        app()->setLocale('widepaylaravelsistema1challenge');
     }
 
     /**
