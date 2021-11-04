@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Modules\WidePayLaravelSistema1Challenge\Entities\Url;
 use Modules\WidePayLaravelSistema1Challenge\Services\JobService;
 
@@ -39,7 +40,10 @@ class RequestJob implements ShouldQueue
             $response = Http::get($this->url->url);
             $this->status = $response->status();
             $this->body = $response->body();
+            Log::info('Request Sucess: '.$this->url->url);
         } catch (Exception $e) {
+            Log::error('Request Error: '.$this->url->url);
+            Log::error($e->getMessage());
             $this->status = 404;
             $this->body = null;
         }

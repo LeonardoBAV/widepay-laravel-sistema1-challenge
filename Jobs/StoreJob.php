@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use Modules\WidePayLaravelSistema1Challenge\Services\RequestService;
 
 class StoreJob implements ShouldQueue
@@ -26,6 +27,7 @@ class StoreJob implements ShouldQueue
             'status_code' => $this->statusCode,
             'body' => $this->body,
         ];
-        (new RequestService())->create($data);
+        $request = (new RequestService())->create($data);
+        Log::info('Store Sucess: Id genereate for entity request - ('.$request->id.')');
     }
 }
