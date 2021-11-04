@@ -3,6 +3,7 @@
 namespace Modules\WidePayLaravelSistema1Challenge\Jobs;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -17,9 +18,13 @@ class RequestJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $time;
-    private $response;
+    private $status;
+    private $body;
 
-    public function __construct(public Url $url) {}
+
+    public function __construct(public Url $url)
+    {
+    }
 
     public function handle()
     {
@@ -27,19 +32,27 @@ class RequestJob implements ShouldQueue
         $this->sendResponse();
     }
 
-    private function doRequest(){
+    private function doRequest()
+    {
         $this->time = Carbon::now()->format('Y-m-d H:i:s');
-        $this->response = Http::get($this->url->url); 
+        try {
+            $response = Http::get($this->url->url);
+            $this->status = $response->status();
+            $this->body = $response->body();
+        } catch (Exception $e) {
+            $this->status = 404;
+            $this->body = null;
+        }
     }
 
-    private function sendResponse(){
+    private function sendResponse()
+    {
         $user_id = $this->url->user_id;
         $url = $this->url->url;
         $time = $this->time;
-        $statusCode = $this->response->status();
-        $body = $this->response->body();
+        $statusCode = $this->status;
+        $body = $this->body;
 
         (new JobService())->dispatchRequestData($user_id, $url, $time, $statusCode, $body);
     }
-
 }

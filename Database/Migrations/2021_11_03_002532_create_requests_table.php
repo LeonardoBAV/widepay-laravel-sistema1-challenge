@@ -21,7 +21,7 @@ class CreateRequestsTable extends Migration
 
             $table->text('url');
             $table->integer('status_code');
-            $table->longText('body');
+            $table->longText('body')->nullable();
             $table->dateTime('time');
 
             $table->timestamps();

@@ -15,7 +15,10 @@ class JobService {
     }
 
     public function dispatchRequestData($user_id, $url, $time, $statusCode, $body){
-        StoreJob::dispatch($user_id, $url, $time, $statusCode, mb_convert_encoding($body, 'UTF-8', 'UTF-8'))->onQueue('requests');
+        if($body != null){
+            $body = mb_convert_encoding($body, 'UTF-8', 'UTF-8');
+        }
+        StoreJob::dispatch($user_id, $url, $time, $statusCode, $body)->onQueue('requests');
     }
 
 }
