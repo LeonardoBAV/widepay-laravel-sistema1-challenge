@@ -20,21 +20,13 @@ use Modules\WidePayLaravelSistema1Challenge\Policies\UrlPolicy;
 
 class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
 {
-    /**
-     * @var string $moduleName
-     */
+
     protected $moduleName = 'WidePayLaravelSistema1Challenge';
 
-    /**
-     * @var string $moduleNameLower
-     */
+
     protected $moduleNameLower = 'widepaylaravelsistema1challenge';
 
-    /**
-     * Boot the application events.
-     *
-     * @return void
-     */
+
     public function boot()
     {
         $this->registerTranslations();
@@ -42,6 +34,14 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
+        $this->fortify();
+        $this->viewComposers();
+        $this->blades();
+        $this->observers();
+        $this->livewire();
+    }
+
+    private function fortify(){
         Fortify::loginView(function () {
             return  view('widepaylaravelsistema1challenge::auth.login');
         });
@@ -49,34 +49,43 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         Fortify::registerView(function () {
             return view('widepaylaravelsistema1challenge::auth.register');
         });
-        
+    }
+
+
+    private function viewComposers(){
         View::composer('widepaylaravelsistema1challenge::index', IndexComposer::class);
         View::composer('widepaylaravelsistema1challenge::tabs.urls.urls', UrlsComposer::class);
+    }
 
+
+    private function blades(){
         Blade::component('widepaylaravelsistema1challenge::components.alert', 'alert');
+    }
 
+
+    private function observers(){
         Url::observe(UrlObserver::class);
+    }
 
+
+    private function livewire(){
         Livewire::component('requests-component', RequestsComponent::class);
         Livewire::component('modal-component', ModalComponent::class);
     }
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
+
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->translation();
+    }
+
+
+    private function translation(){
         app()->setLocale('widepaylaravelsistema1challenge');
     }
 
-    /**
-     * Register config.
-     *
-     * @return void
-     */
+
     protected function registerConfig()
     {
         $this->publishes([
@@ -87,11 +96,7 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Register views.
-     *
-     * @return void
-     */
+
     public function registerViews()
     {
         $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
@@ -105,11 +110,7 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
-    /**
-     * Register translations.
-     *
-     * @return void
-     */
+
     public function registerTranslations()
     {
         $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
@@ -121,15 +122,12 @@ class WidePayLaravelSistema1ChallengeServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
+
     public function provides()
     {
         return [];
     }
+
 
     private function getPublishableViewPaths(): array
     {
