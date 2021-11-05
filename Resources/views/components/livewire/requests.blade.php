@@ -16,7 +16,7 @@
             <td class="text-center">{{ $request->time }}</td>
             <td class="text-center">{{ $request->status_code }}</td>
             <td class="text-end">
-                <button type="button" class="btn btn-dark" wire:click="$emit('showBody', '{{ $request->id }}')" {{ $request->body==null?'disabled':'' }}>
+                <button type="button" class="btn btn-dark" wire:click="$emitSelf('showBody', '{{ $request->id }}')" {{ $request->body==null?'disabled':'' }}>
                     Detalhes
                 </button>
             </td>
