@@ -17,32 +17,46 @@ cd example-app
 ./vendor/bin/sail composer require leonardobav/widepaylaravelsistema1challenge-module
 ./vendor/bin/sail artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
 ./vendor/bin/sail artisan module:enable
+./vendor/bin/sail artisan module:publish-translation
 ./vendor/bin/sail artisan queue:table
 ./vendor/bin/sail artisan migrate
 mv Modules/Widepaylaravelsistema1challenge/Routes/web_replace.php routes/web.php
-./vendor/bin/sail rodar npm lá no pacote n sei como vamos fazer o teste
 ```
-
-- Descrição do que cada comando realiza
-    - 1- Download da versão limpa do Laravel
-    - 2- Entrar na pasta raiz do projeto
-    - 3- Inicializar os containers pelo  Laravel Sail
-    - 4- Instalar o projeto do desafio via composer
-    - 5- Ativar modulo do projeto
-    - 6- Crias as migrations para o armazenamento das Jobs
-    - 7- Subir com a estrutura do banco de dados
-
+### Entrando no Container para Compilar os assets 
+```sh
+./vendor/bin/sail shell
+cd Modules/Widepaylaravelsistema1challenge/
+npm install
+npm run dev
+exit
+```
 
 ### Processos Daemon
 
 Abra dois terminais e para cada um vá para a pasta raiz do projeto e executo os seguintes comandos um para cada um:
+
 ```sh
 ./vendor/bin/sail artisan queue:work --queue=requests
 ./vendor/bin/sail artisan queue:work --queue=urls
 ```
 
+No arquivo .env trocar a linha 
 
-#### Teste
+```sh
+QUEUE_CONNECTION=sync
+```
+
+Por
+
+```sh
+QUEUE_CONNECTION=database
+```
+
+
+#### Executar o projeto
+
+Acesse o link abaixo no browser
+
 ```sh
 http://localhost
 ```
