@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/widepaylaravelsistema1challenge",
+    "name": "leonardobav/widepaylaravelsistema1challenge-module",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Leonardo Borges Athayde Vasconcelos",
+            "email": "leobav1988@gmail.com"
         }
     ],
     "extra": {
@@ -19,5 +19,14 @@
         "psr-4": {
             "Modules\\WidePayLaravelSistema1Challenge\\": ""
         }
+    },
+    "type": "laravel-module",
+    "require": {
+        "nwidart/laravel-modules": "^8.2",
+        "joshbrw/laravel-module-installer": "^2.0",
+        "guzzlehttp/guzzle": "^7.4",
+        "laravel/fortify": "^1.8",
+        "laravelcollective/html": "^6.2",
+        "livewire/livewire": "^2.7"
     }
 }
